@@ -16,3 +16,19 @@ const debounceFunction = (apiCall,delay) => {
 }
 
 let callDebounceFunction = debounceFunction(getData, 300);
+
+// Throttling Function
+const throttleFunction = (apiCall, delay) => {
+    let flag = true;
+    return function() {
+        if(flag) {
+            apiCall.apply(this,arguments);
+            flag = false;
+            setTimeout(() => {
+                flag = true;
+            }, delay);
+        }
+    }
+}
+
+let callThrottleFunction = throttleFunction(getData, 500);
